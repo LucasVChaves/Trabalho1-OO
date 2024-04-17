@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package br.ufjf.dcc.jogodavelha;
 
 import java.util.Scanner;
@@ -25,9 +21,12 @@ public class JogoDaVelha {
 
         do {
             tabuleiro.imprimirTabuleiro();
+         
             System.out.println("Jogador " + jogadorAtual + ", é sua vez.");
+            
             System.out.print("Digite a linha (1-3): ");
             linha = scanner.nextInt() - 1;
+            
             System.out.print("Digite a coluna (1-3): ");
             coluna = scanner.nextInt() - 1;
         } while (!tabuleiro.jogadaValida(linha, coluna));
