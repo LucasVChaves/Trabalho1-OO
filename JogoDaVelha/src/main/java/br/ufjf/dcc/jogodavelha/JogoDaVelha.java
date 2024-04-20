@@ -9,17 +9,20 @@ import java.util.Scanner;
 public class JogoDaVelha {
     private Tabuleiro tabuleiro;
     private char jogadorAtual;
+    private boolean modoPvP;
 
-    public JogoDaVelha() {
+    public JogoDaVelha(boolean modoPvP) {
         tabuleiro = new Tabuleiro();
         jogadorAtual = 'X';
+        this.modoPvP = modoPvP;
     }
 
-    public void jogar() {
+    public void jogada() {
         Scanner scanner = new Scanner(System.in);
         int linha, coluna;
 
-        do {
+        if(modoPvP) {
+            do {
             tabuleiro.imprimirTabuleiro();
          
             System.out.println("Jogador " + jogadorAtual + ", é sua vez.");
@@ -29,9 +32,13 @@ public class JogoDaVelha {
             
             System.out.print("Digite a coluna (1-3): ");
             coluna = scanner.nextInt() - 1;
-        } while (!tabuleiro.jogadaValida(linha, coluna));
+            } while (!tabuleiro.jogadaValida(linha, coluna));
 
-        tabuleiro.fazerJogada(linha, coluna, jogadorAtual);
+            tabuleiro.fazerJogada(linha, coluna, jogadorAtual);
+        } else {
+            System.out.println("WIP");
+            return;
+        }
 
         if (tabuleiro.verificarVitoria(jogadorAtual)) {
             System.out.println("Jogador " + jogadorAtual + " venceu!");
@@ -39,7 +46,7 @@ public class JogoDaVelha {
             System.out.println("O jogo terminou em empate!");
         } else {
             trocarJogador();
-            jogar();
+            jogada();
         }
     }
 
@@ -52,8 +59,17 @@ public class JogoDaVelha {
     }
 
     public static void main(String[] args) {
-        JogoDaVelha jogo = new JogoDaVelha();
+        Scanner scanner = new Scanner(System.in);
+        
         System.out.println("Bem-vindo ao Jogo da Velha!");
-        jogo.jogar();
+        System.out.println("Escolha o Modo de Jogo:");
+        System.out.println("0 - Jogador vs Jogador");
+        System.out.println("1 - Jogador vs Computador");
+        System.out.print("Modo: ");
+        int modoInt = scanner.nextInt();
+        boolean modoPvP = modoInt == 0;
+        
+        JogoDaVelha jogo = new JogoDaVelha(modoPvP);
+        jogo.jogada();
     }
 }
