@@ -21,13 +21,14 @@ public class Tabuleiro {
         }
     }
     
-    public boolean jogadaValida(int linha, int coluna) {
+    public boolean jogadaValida(int linha, int coluna, boolean bot) {
         if (linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3) {
             System.out.println("Posição inválida. Tente novamente.");
             return false;
         }
         if (tabuleiro[linha][coluna] != '-') {
-            System.out.println("Essa posição já está ocupada. Tente novamente.");
+            if(!bot)
+                System.out.println("Essa posição já está ocupada. Tente novamente.");
             return false;
         }
         return true;
